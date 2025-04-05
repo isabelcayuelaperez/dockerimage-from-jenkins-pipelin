@@ -24,7 +24,7 @@ pipeline {
                 sh "echo 'Creo el contenedor'"
                 dir('contenedor') {
                     withCredentials([usernamePassword(credentialsId: 'gitprueba', passwordVariable: 'password', usernameVariable: 'usuario')]) {
-                        git 'https://github.com/dialarrey/dockerimage-from-jenkins-pipelin.git'
+                        git 'https://github.com/isabelcayuelaperez/dockerimage-from-jenkins-pipelin'
                         sh('''
                             cp ../codigo/webapp/target/webapp.war .
                             git add .
