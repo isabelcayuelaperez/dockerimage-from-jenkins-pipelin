@@ -8,31 +8,11 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            steps {
-                
-                //Creo el directorio del código. Si no existe se crea
-                
-                dir('codigo') {
-                    // Get some code from a GitHub repository
-                    git 'https://github.com/dialarrey/maven-project.git'
-
-                    // Run Maven on a Unix agent.
-                    sh "mvn clean package -DskipTests"
-
-                    // To run Maven on a Windows agent, use
-                    // bat "mvn -Dmaven.test.failure.ignore=true clean package"    
-                }
-                
+              steps {
+                echo 'Fingimos que compilamos el proyecto'
+                writeFile file: 'codigo/webapp/target/webapp.war', text: 'fake WAR content'
+              }
             }
-
-            post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
-                    archiveArtifacts 'codigo/webapp/target/*.war'
-                }
-            }
-        }
         stage('Test') {
             steps {
                 sh "echo 'Realización de algunos Test'"    
